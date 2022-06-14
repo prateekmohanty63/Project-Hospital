@@ -75,27 +75,30 @@
                         <div class="wow fadeInUp" data-wow-delay="0.8s">
                             <!--First Name of the User-->
                             <div class="col-md-6 col-sm-6">
-                                <label for="name">First Name</label> {{form.FirstName}}
+                                <label for="name">First Name</label>
+                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                             </div>
                             <!--Last name of the user-->
                             <div class="col-md-6 col-sm-6">
-                                <label for="name">Last Name</label> {{form.LastName}}
+                                <label for="name">Last Name</label>
+                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                             </div>
                             <!--Email of the user-->
                             <div class="col-md-6 col-sm-6">
                                 <label for="email">Email</label> 
-                                {{form.Email}} 
+                                <input class="form-control" type="email" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                                 <span style="color: red;">{{emailerror}}</span>
                             </div>
                             <!--Date of Birth of the user-->
                             <div class="col-md-6 col-sm-6">
-                                <label for="date">Date of Birth</label> {{form.DateOfBirth}}
+                                <label for="date">Date of Birth</label>
+                                <input class="form-control" type="date" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                             </div>
                             <!--Division for UserName,Password,Confirm Password, Mobile Number-->
                             <div class="col-md-12 col-sm-12">
                                 <!--Username of the user-->
                                 <label for="username">Username</label>
-                                {{form.Username}}
+                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                                 <span style="color: red;"> {{usernameerror}} </span>
                                 <br>
                                 
@@ -115,7 +118,8 @@
                                 <span id="res" style="margin-bottom: 1em; color:red;"></span> <br> <br>
 
                                 <!--Mobile Number of the user-->
-                                <label for="phone_number">Mobile Number</label> {{form.MobileNumber}}
+                                <label for="phone_number">Mobile Number</label>
+                                <input class="form-control" type="tel" id="o_psw" name="psw" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 
                                 <!--Submit Button-->
                                 <button type="submit" class="form-control" id="user-cf-submit" name="submit">Register</button>
