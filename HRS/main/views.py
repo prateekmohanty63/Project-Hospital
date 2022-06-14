@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 # Create your views here.
@@ -8,8 +8,11 @@ from django.http import HttpResponse
 def index(request):
     return render(request,'index.html')
 
-def signin(request):
+def signIn(request):
     return render(request,'signin.html')
 
-def signup(request):
+def signUp(request):
     return render(request,'signup.html')
+
+def userRegistration(request):
+    return render(request,"user_registration.html")
