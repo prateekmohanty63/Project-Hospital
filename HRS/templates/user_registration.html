@@ -55,7 +55,11 @@
     <section id="user_registration" data-stellar-background-ratio="3">
         <!-- Creating  grid for the user registration which contains a image and form-->
         <div class="container">
+            
             <div class="row">
+                <div>{% for message in messages %}
+                    <h3 style="margin-bottom: 1em; color:red;">{{message}}</h3>
+                    {% endfor %}
                 <!--Left Half(Image)-->
                 <div class="col-md-6 col-sm-6">
                     <img src="{% static 'images/user_registeration.jpg' %}" alt="Use Image Here">
@@ -63,7 +67,7 @@
                 <!--Right Half(Form)-->
                 <div class="col-md-6 col-sm-6">
                     <!-- Form for User Registration on submitting goes to index page with verification message-->
-                    <form id="user-registration" role="form" method="post" action="#" onsubmit="return checkPass()" enctype=multipart/form-data>
+                    <form id="user-registration" role="form" method="post" action="/userReg/" onsubmit="return checkPass()" enctype=multipart/form-data>
                         {% csrf_token %}
                         <!--Header above the form-->
                         <!--below class="wow fadeInUp" is for the pop-up animation-->
@@ -76,39 +80,40 @@
                             <!--First Name of the User-->
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">First Name</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="text" id="o_psw" name="fname"  required>
                             </div>
                             <!--Last name of the user-->
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Last Name</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="text" id="o_psw" name="lname"  required>
                             </div>
                             <!--Email of the user-->
                             <div class="col-md-6 col-sm-6">
                                 <label for="email">Email</label> 
-                                <input class="form-control" type="email" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="email" id="o_psw" name="email" required>
                                 <span style="color: red;">{{emailerror}}</span>
                             </div>
                             <!--Date of Birth of the user-->
                             <div class="col-md-6 col-sm-6">
                                 <label for="date">Date of Birth</label>
-                                <input class="form-control" type="date" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="date" id="o_psw" name="date"  required>
                             </div>
                             <!--Division for UserName,Password,Confirm Password, Mobile Number-->
                             <div class="col-md-12 col-sm-12">
                                 <!--Username of the user-->
                                 <label for="username">Username</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" -->
+                                <input class="form-control" type="text" id="o_psw" name="user_name" required>
                                 <span style="color: red;"> {{usernameerror}} </span>
                                 <br>
                                 
                                 <!--Password-->
                                 <label for="psw">Password</label>
-                                <input class="form-control" type="password" id="o_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="password" id="o_psw" name="password1"  required>
                                 
                                 <!--Confirm Password-->
                                 <label for="psw">Confirm Password</label>
-                                <input class="form-control" type="password" id="c_psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="password" id="c_psw" name="password2" required>
 
                                 <!--Show Password icon-->
                                 <div class="shps" style="margin-top: 1em;">
@@ -119,7 +124,7 @@
 
                                 <!--Mobile Number of the user-->
                                 <label for="phone_number">Mobile Number</label>
-                                <input class="form-control" type="tel" id="o_psw" name="psw" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                <input class="form-control" type="text" id="o_psw" name="mobileNumber"  required>
 
                                 <!--Submit Button-->
                                 <button type="submit" class="form-control" id="user-cf-submit" name="submit">Register</button>
@@ -227,7 +232,7 @@
     <script src="{% static 'js/smoothscroll.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-    <script src="{% static 'js/authentication.js' %}"></script>
+    <!-- <script src="{% static 'js/authentication.js' %}"></script> -->
 
 </body>
 
