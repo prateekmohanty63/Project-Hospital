@@ -10,5 +10,6 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('signin/',views.signIn,name='signin'),
     path('signup/',views.signUp,name='signup'),
-    path('userReg/',views.userRegistration,name='userReg')
+    path('userReg/',views.userRegistration,name='userReg'),
+    path('hospitalReg/',views.hospitalRegistration,name='hospitalReg')
 ]
