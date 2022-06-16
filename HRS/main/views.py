@@ -74,3 +74,6 @@ def userRegistration(request):
 
 def hospitalRegistration(request):
     return render(request,'Hospitalregistion.html')
+
+def doctorRegistration(request):
+    return render(request,'doctor_regestration.html')
