@@ -70,3 +70,10 @@ def userRegistration(request):
     if request.method=="GET":
         print("GET")
         return render(request,"user_registration.html")
+    
+
+def hospitalRegistration(request):
+    return render(request,'Hospitalregistion.html')
+
+def doctorRegistration(request):
+    return render(request,'doctor_regestration.html')
