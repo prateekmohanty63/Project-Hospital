@@ -81,40 +81,34 @@
                         <div class="wow fadeInUp animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
                             <div class="col-md-6 col-sm-6">
                                 <!-- First name field in doctor registration form-->
-                                <label for="name">First Name</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="name">First Name</label> {{form.FirstName}}
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <!--last name field in doctor registration form-->
-                                <label for="name">Last Name</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="name">Last Name</label> {{form.LastName}}
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <!-- email field in doctor registration form-->
-                                <label for="email">Email</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="email">Email</label> {{form.Email}}
                                 <span style="color: red;">{{emailerror}}</span>
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <!-- user name field in doctor registration form-->
-                                <label for="username">Username</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="username">Username</label> {{form.Username}}
                                 <span style="color: red;"> {{usernameerror}} </span>
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <!-- Date of birth field in doctor registration form-->
-                                <label for="date">Date of Birth</label>
-                                <input class="form-control" type="date" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="date">Date of Birth</label> {{form.DateOfBirth}}
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <!-- profile photo field in doctor registration form-->
-                                <label for="ProfilePhoto">Profile Photo</label>
-                                <input class="form-control" type="image" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="ProfilePhoto">Profile Photo</label> {{form.ProfilePhoto}}
                             </div>
 
 
@@ -151,44 +145,31 @@
                                     department
                                     status
                                 -->
-                                <label for="phone_number">Mobile Number</label>
-                                <input class="form-control" type="tel" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="phone_number">Mobile Number</label> {{form.MobileNumber}}
 
-                                <label for="certificates">Certificates for proof</label>
-                                <input class="form-control" type="file" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="certificates">Certificates for proof</label> {{form.DoctorLicense}}
 
-                                <label for="years of experience">Years of experience</label>
-                                <input class="form-control" type="month" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="years of experience">Years of experience</label> {{form.YearsOfExperience}}
 
-                                <label for="education">Education</label>
-                                <input class="form-control" type="file" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="education">Education</label> {{form.Education}}
 
-                                <label for="master">Master</label>
-                                <input class="form-control" type="file" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="master">Master</label> {{form.Masters}}
 
-                                <label for="hospitalname">Hospital</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="hospitalname">Hospital</label> {{form.HospitalName}}
 
-                                <label for="hospitalRegNum">Hospital registeration number</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="hospitalRegNum">Hospital registeration number</label> {{form.HospitalRegisterationNumber}}
 
-                                <label for="city">City</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="city">City</label> {{form.City}}
 
-                                <label for="state">State</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="state">State</label> {{form.State}}
 
-                                <label for="pincode">Pincode</label>
-                                <input class="form-control" type="number" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="pincode">Pincode</label> {{form.Pincode}}
 
-                                <label for="select">Department</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="select">Department</label> {{form.Department}}
 
-                                <label for="status">Status</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="status">Status</label> {{form.Description}}
                                 <!-- this field is to mention some of achievements or qualities-->
-                                <label for="achievements">Enter any four achievements</label>
-                                <input class="form-control" type="text" id="o_psw" name="psw" pattern="" title="" required>
+                                <label for="achievements">Enter any four achievements</label> {{form.Achievements1}} {{form.Achievements2}} {{form.Achievements3}} {{form.Achievements4}}
 
                                 <!-- button to submit the form-->
                                 <button type="submit" class="form-control" id="user-cf-submit" name="submit">Register</button>

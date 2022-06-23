@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import UserForm
+from .forms import UserForm,DoctorForm
 from django import forms
 
 
@@ -76,4 +76,55 @@ def hospitalRegistration(request):
     return render(request,'Hospitalregistion.html')
 
 def doctorRegistration(request):
-    return render(request,'doctor_regestration.html')
+
+    if request.method=="POST":
+        # creating an instance of the Doctor registration form
+        doctorForm=DoctorForm(request.POST,request.FILES)
+
+        #print(doctorForm)
+
+        username=request.POST['Username']
+        password=request.POST['psw']
+        email=request.POST['Email']
+        print(username,password,email)
+
+        emailerror=""
+        usernameerror=""
+
+        if User.objects.filter(username=username).exists():
+            usernameerror = "Username already exists"
+        else:
+            usernameerror = ""
+
+        if User.objects.filter(email=email).exists():
+            emailerror="email already exists"
+        else:
+            emailerror=""
+
+        context={
+            "form":DoctorForm,
+            "emailerror":emailerror,
+            "usernameerror":usernameerror
+        }
+
+        # if there is an error
+        if usernameerror!="" or emailerror!="":
+            print("in")
+            return render(request,'doctor_regestration.html',context)
+        
+        if doctorForm.is_valid():
+            print(username)
+            user=User.objects.create_user(username=username,password=password,email=email)
+            user.save()
+
+            doctorForm.save()
+            return HttpResponse("Registered")
+
+
+
+
+    else:
+        form=DoctorForm()
+        context={'form':form}
+
+        return render(request,'doctor_regestration.html',context)
