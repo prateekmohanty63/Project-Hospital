@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import UserForm,DoctorForm
+from .forms import UserForm,DoctorForm,HospitalForm
 from django import forms
 
 
@@ -75,7 +75,9 @@ def userRegistration(request):
 def hospitalRegistration(request):
 
     if request.method=="GET":
-        return render(request,'Hospitalregistion.html')
+        hospitalform=HospitalForm()
+        context={'form':hospitalform}
+        return render(request,'Hospitalregistion.html',context)
 
 def doctorRegistration(request):
 
