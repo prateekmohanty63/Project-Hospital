@@ -73,7 +73,9 @@ def userRegistration(request):
     
 
 def hospitalRegistration(request):
-    return render(request,'Hospitalregistion.html')
+
+    if request.method=="GET":
+        return render(request,'Hospitalregistion.html')
 
 def doctorRegistration(request):
 
@@ -128,3 +130,6 @@ def doctorRegistration(request):
         context={'form':form}
 
         return render(request,'doctor_regestration.html',context)
+    
+
+
