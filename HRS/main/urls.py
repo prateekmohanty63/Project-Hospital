@@ -12,5 +12,9 @@ urlpatterns = [
     path('signup/',views.signUp,name='signup'),
     path('userReg/',views.userRegistration,name='userReg'),
     path('hospitalReg/',views.hospitalRegistration,name='hospitalReg'),
-    path('doctorReg/',views.doctorRegistration,name='doctorReg')
+    path('doctorReg/',views.doctorRegistration,name='doctorReg'),
+
+    # profile views
+
+    path('doctorProfile/<int:doctor_id>',views.doctorProfile,name='doctorProfile')
 ]
