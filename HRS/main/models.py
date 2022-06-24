@@ -1,4 +1,5 @@
 
+from datetime import datetime
 from django.db import models
 from PIL import Image
 from .choices import States,Department
@@ -89,3 +90,19 @@ class Hospital(models.Model):
     Achievements6 = models.CharField(max_length=50, default="No Hospital information added recently")
     def __str__(self):
         return self.HospitalName
+
+
+
+
+# Doctor review
+class DocReview(models.Model):
+    doctor=models.ForeignKey(Doctor,on_delete=models.DO_NOTHING)
+    star_rating=models.TextField(blank=True)
+    non_rating=models.TextField(blank=True)
+    review=models.TextField(blank=True)
+    user=models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    review_date=models.DateTimeField(default=datetime.now,blank=True)
+
+    def __str__(self):
+        return self.user.Username
+        
