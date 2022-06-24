@@ -209,3 +209,6 @@ def doctorRegistration(request):
     
 
 
+
+
+# VIEWS FOR PROFILES
