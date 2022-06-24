@@ -1,12 +1,14 @@
+from pydoc import Doc
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from main.models import Hospital
+from main.models import Hospital,Doctor
 from .forms import UserForm,DoctorForm,HospitalForm
 from django import forms
+from .choices import Department, States
 
 
 # Create your views here.
@@ -209,3 +211,60 @@ def doctorRegistration(request):
     
 
 
+
+
+# VIEWS FOR PROFILES
+
+def doctorProfile(request,doctor_id):
+
+    # doctor instance
+    doctor=Doctor.objects.get(pk=doctor_id)
+    print(doctor)
+
+    
+    # ratings instance
+    count=doctor.Ratings_count
+
+    if count!=0:
+        five_starPercentage=100/100*count   # (number of 5 stars)
+        four_starPercentage=100/100*count   # (number of 5 stars)
+        three_starPercentage=100/100*count   # (number of 5 stars)
+        two_starPercentage=100/100*count   # (number of 5 stars)
+        one_starPercentage=100/100*count   # (number of 5 stars)
+    else:
+        five_starPercentage=100/100*count   # (number of 5 stars)
+        four_starPercentage=100/100*count   # (number of 5 stars)
+        three_starPercentage=100/100*count   # (number of 5 stars)
+        two_starPercentage=100/100*count   # (number of 5 stars)
+        one_starPercentage=100/100*count   # (number of 5 stars)
+    
+    ratings_percentage={
+        "five_star":five_starPercentage,
+        "five_star":four_starPercentage,
+        "five_star":three_starPercentage,
+        "five_star":two_starPercentage,
+        "five_star":one_starPercentage
+    }
+
+    # doctor department
+    dept=Department[doctor.Department-1][1]
+
+
+    # doctor experience
+    
+    if doctor.YearsOfExperience==0:
+        exp="Experience of the doctor not given"
+    else:
+        exp=doctor.YearsOfExperience
+
+    context={
+        'doctor':doctor,
+        "ratings_percentage":ratings_percentage,
+        "department":dept,
+        'experience':exp
+    }
+
+
+    return render(request,'DoctorProfile.html',context)
+
+   
