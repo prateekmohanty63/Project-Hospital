@@ -267,4 +267,15 @@ def doctorProfile(request,doctor_id):
 
     return render(request,'DoctorProfile.html',context)
 
+
+
+
+# Doctor review
+
+# def docReview(request):
+
+#     if request.method=="POST":
+
+
+
    
