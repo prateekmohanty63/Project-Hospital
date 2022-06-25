@@ -3,19 +3,20 @@ from datetime import datetime
 from django.db import models
 from PIL import Image
 from .choices import States,Department
+from django.contrib.auth.models import User
 
 
 # # Create your models here.
 
-class User(models.Model):
-    FirstName = models.CharField(max_length=150)
-    LastName = models.CharField(max_length=150)
-    Username = models.CharField(max_length=150)
-    Email = models.CharField(max_length=150)
-    DateOfBirth = models.CharField(max_length=150)
-    MobileNumber = models.CharField(max_length=10)
-    def __str__(self):
-        return self.Username
+# class User(models.Model):
+#     FirstName = models.CharField(max_length=150)
+#     LastName = models.CharField(max_length=150)
+#     Username = models.CharField(max_length=150)
+#     Email = models.CharField(max_length=150)
+#     DateOfBirth = models.CharField(max_length=150)
+#     MobileNumber = models.CharField(max_length=10)
+#     def __str__(self):
+#         return self.Username
 
 
 class Doctor(models.Model):
@@ -104,5 +105,5 @@ class DocReview(models.Model):
     review_date=models.DateTimeField(default=datetime.now,blank=True)
 
     def __str__(self):
-        return self.user.Username
+        return self.user.username
         

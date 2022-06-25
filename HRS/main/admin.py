@@ -15,7 +15,7 @@ class DocReviewAdmin(admin.ModelAdmin):
     
 admin.site.register( Doctor)
 
-admin.site.register(User)
+# admin.site.register(User)
 
 admin.site.register(Hospital)
 

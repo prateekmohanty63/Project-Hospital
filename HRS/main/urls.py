@@ -16,5 +16,8 @@ urlpatterns = [
 
     # profile views
 
-    path('doctorProfile/<int:doctor_id>',views.doctorProfile,name='doctorProfile')
+    path('doctorProfile/<int:doctor_id>',views.doctorProfile,name='doctorProfile'),
+
+    # doctor review
+    path('doctorReview/',views.docReview,name='doctorReview')
 ]
