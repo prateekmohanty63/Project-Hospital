@@ -459,7 +459,7 @@
 
             <!-- flag is used to add view more reviews button -->
             {% if flag == 0 %}
-            <form action="{% url 'DoctorProfile' doctor.id %}" method="POST">
+            <form action="{% url 'doctorProfile' doctor.id %}" method="POST">
               {% csrf_token %}
               <button class="btn btn-info">Load more</button>
             </form>

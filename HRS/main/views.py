@@ -237,6 +237,30 @@ def doctorProfile(request,doctor_id):
     doctor=Doctor.objects.get(pk=doctor_id)
     print(doctor)
 
+    # fetching all the reviews of the doctor , ordered by latest date
+    queryset_list=DocReview.objects.order_by('-review_date').filter(doctor=doctor)
+
+    five_stars = 0
+    for review  in queryset_list:
+        if review.star_rating == "12345":
+            five_stars = five_stars + 1
+    four_stars = 0
+    for review  in queryset_list:
+        if review.star_rating == "1234":
+            four_stars = four_stars + 1
+    three_stars = 0
+    for review  in queryset_list:
+        if review.star_rating == "123":
+            three_stars = three_stars + 1
+    two_stars = 0
+    for review  in queryset_list:
+        if review.star_rating == "12":
+            two_stars = two_stars + 1
+    one_stars = 0
+    for review  in queryset_list:
+        if review.star_rating == "1":
+            one_stars = one_stars + 1
+
     
     # ratings instance
     count=doctor.Ratings_count
@@ -253,6 +277,15 @@ def doctorProfile(request,doctor_id):
         three_starPercentage=100/100*count   # (number of 5 stars)
         two_starPercentage=100/100*count   # (number of 5 stars)
         one_starPercentage=100/100*count   # (number of 5 stars)
+
+    
+    rating_count={
+        "five_star":five_stars,
+        "four_star":four_stars,
+        "three_star":three_stars,
+        "two_star":two_stars,
+        "one_star":one_stars
+    }
     
     ratings_percentage={
         "five_star":five_starPercentage,
@@ -265,6 +298,14 @@ def doctorProfile(request,doctor_id):
     # doctor department
     dept=Department[doctor.Department-1][1]
 
+    # fetching the doctor review (taking only 3)
+    queryset_list=DocReview.objects.order_by('-review_date').filter(doctor=doctor)[:3]
+    flag=0
+
+    if request.POST=="POST":
+        flag=1
+        queryset_list=DocReview.objects.order_by('-review_date').filter(doctor=doctor)[:3]
+
 
     # doctor experience
     
@@ -275,6 +316,9 @@ def doctorProfile(request,doctor_id):
 
     context={
         'doctor':doctor,
+        'doctor_reviews':queryset_list,
+        'flag':flag,
+        'ratings_count':rating_count,
         "ratings_percentage":ratings_percentage,
         "department":dept,
         'experience':exp
