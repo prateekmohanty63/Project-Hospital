@@ -1,4 +1,6 @@
 
+from collections import UserList
+from pickle import NONE
 from pydoc import Doc
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -18,7 +20,51 @@ from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
-    return render(request,'index.html')
+    username=request.user.username
+
+
+    # storing all the users, doctors and hospitals
+
+    users=User.objects.all()
+    doctors=Doctor.objects.all()
+    hospitals=Hospital.objects.all()
+
+    user_list=[]
+    doctor_list=[]
+    hospital_list=[]
+
+    # username of user , doctors and hospitals in a list
+    for user in users:
+        user_list.append(user.username)
+    
+    for doctor in doctors:
+        doctor_list.append(doctor.Username)
+
+    for hospital in hospitals:
+        hospital_list.append(hospital)
+
+    
+    USER=NONE
+    type="default"
+
+    if username in user_list:
+        USER=User.objects.all().filter(username=username).get()
+        type="user"
+    
+    if username in doctor_list:
+        USER=Doctor.objects.all().filter(Username=username).get()
+        type="doctor"
+    
+    if username in hospital_list:
+        USER=Hospital.objects.all().filter(Username=username).get()
+        type="hospital"
+
+    context={
+        'USER':USER,
+        'type':type
+    }
+
+    return render(request,'index.html',context)
 
 def signIn(request):
     if request.method=="POST":
@@ -40,6 +86,18 @@ def signIn(request):
 # this view is for the common page of signup
 def signUp(request):
     return render(request,'signup.html')
+
+
+# signout view
+
+def signout(request):
+    user=request.user
+    context={
+        'USER':user
+    }
+    auth.logout(request)
+    messages.success(request,"Signed out successfully",context)
+    return redirect('index')
 
 def userRegistration(request):
 
