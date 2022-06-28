@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2"></div>
                 <div class="col-md-8 col-sm-8">
-                    <form id="user-registration" role="form" name="doct-reg" method="post" action="{% url 'UpdateProfile' %}" enctype=multipart/form-data>
+                    <form id="user-registration" role="form" name="doct-reg" method="post" action="{% url 'DocProfileUpdate' %}" enctype=multipart/form-data>
                         {% csrf_token %}
                         <div class="reg_title wow fadeInUp animated" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
                             <h2> Update your profile </h2>
