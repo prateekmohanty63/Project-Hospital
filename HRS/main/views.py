@@ -436,4 +436,10 @@ def docReview(request):
 
 
 
+# doctor profile updated
+
+def DocProfileUpdate(request):
+
+    if request.method=="GET":
+        return render(request,'doctorUpdateProfile.html')
    
