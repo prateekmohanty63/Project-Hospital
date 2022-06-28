@@ -9,6 +9,7 @@ from .views import *
 urlpatterns = [
     path('',views.index,name='index'),
     path('signin/',views.signIn,name='signin'),
+    path('signout/',views.signout,name='signout'),
     path('signup/',views.signUp,name='signup'),
     path('userReg/',views.userRegistration,name='userReg'),
     path('hospitalReg/',views.hospitalRegistration,name='hospitalReg'),

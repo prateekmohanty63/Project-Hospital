@@ -41,6 +41,14 @@ def signIn(request):
 def signUp(request):
     return render(request,'signup.html')
 
+
+# signout view
+
+def signout(request):
+    auth.logout(request)
+    messages.success(request,"Signed out successfully")
+    return redirect('index')
+
 def userRegistration(request):
 
     if request.method=="POST":
