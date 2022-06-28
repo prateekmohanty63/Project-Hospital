@@ -11,6 +11,7 @@ from .forms import DoctorForm,HospitalForm
 from django import forms
 from .choices import Department, States
 from django.contrib import auth
+from django.core.files.storage import FileSystemStorage
 
 
 # Create your views here.
@@ -36,6 +37,7 @@ def signIn(request):
     else:
         return render(request, 'signin.html')
 
+# this view is for the common page of signup
 def signUp(request):
     return render(request,'signup.html')
 
@@ -436,4 +438,131 @@ def docReview(request):
 
 
 
+# doctor profile updated
+
+def DocProfileUpdate(request):
+    if request.method=="POST":
+        flag=0
+        data=request.POST
+        files=request.FILES.get('profilePhoto')
+        fs=FileSystemStorage()
+
+        try:
+            fs.save("DoctorPhotos/"+files.name,files)
+            Path="DoctorPhotos/"+str(files.name)
+        except AttributeError:
+            flag=1
+        
+        # fetching the doctor from the username
+        doctor=Doctor.objects.all().filter(Username=request.user.username).get()
+
+        if data['fname'] == "":
+            fname = doctor.FirstName
+        else:
+            fname = data['fname']
+
+        if data['lname'] == "":
+            lname = doctor.LastName
+        else:
+            lname = data['lname']
+
+        if flag == 0:
+            profilePhoto = Path
+        else:
+            profilePhoto = doctor.ProfilePhoto
+
+        if data['phn_no'] == "":
+            mobilenum = doctor.MobileNumber
+        else:
+            mobilenum = data['phn_no']
+
+        if data['yoe'] == "":
+            yoe = doctor.YearsOfExperience
+        else:
+            yoe = data['yoe']
+
+        if data['hospname'] == "":
+            hospname = doctor.HospitalName
+        else:
+            hospname = data['hospname']
+
+        if data['hospRegNum'] == "":
+            hospRegNum = doctor.HospitalRegisterationNumber
+        else:
+            hospRegNum = data['hospRegNum']
+
+        if data['city'] == "":
+            city = doctor.City
+        else:
+            city = data['city']
+
+        if data['state'] == '0':
+            state = doctor.State
+        else:
+            state = data['state']
+            
+
+        if data['pinc'] == "":
+            pincode = doctor.Pincode
+        else:
+            pincode = data['pinc']
+
+        if data['dept'] == '0':
+            dept = doctor.Department
+        else:
+            dept = data['dept']
+
+        if data['desc'] == "":
+            desc = doctor.Description
+        else:
+            desc = data['desc']
+
+        if data['ach1'] == "":
+            ach1 = doctor.Achievements1
+        else:
+            ach1 = data['ach1']
+
+        if data['ach2'] == "":
+            ach2 = doctor.Achievements2
+        else:
+            ach2 = data['ach2']
+
+        if data['ach3'] == "":
+            ach3 = doctor.Achievements3
+        else:
+            ach3 = data['ach3']
+
+        if data['ach4'] == "":
+            ach4 = doctor.Achievements4
+        else:
+            ach4 = data['ach4']
+
+        
+        doctorUpdated=Doctor.objects.all().filter(Username=request.user.username).update(
+            FirstName = fname,
+            LastName = lname,
+            ProfilePhoto = profilePhoto,
+            MobileNumber = mobilenum,
+            YearsOfExperience = yoe ,          
+            HospitalName = hospname,
+            HospitalRegisterationNumber = hospRegNum,
+            City = city,
+            State = state,
+            Pincode = pincode,
+            Department = dept,
+            Description = desc,
+            Achievements1 = ach1,
+            Achievements2 = ach2,
+            Achievements3 = ach3,
+            Achievements4 = ach4
+
+        )
+
+        doctor_id=str(doctor.id)
+        messages.success(request,"Updated Profile successfully")
+        return redirect('/doctorProfile/'+doctor_id)
+
+
+    else:
+        return render(request,'doctorUpdateProfile.html')
    
