@@ -1,5 +1,6 @@
 
 from collections import UserList
+from os import stat_result
 from pickle import NONE
 from pydoc import Doc
 from django.http import HttpResponse
@@ -629,7 +630,90 @@ def DocProfileUpdate(request):
 
 # search for doctor
 
-def searchResult(request):
-    if request.method=="GET" :
-        return render(request,'searchbarResults.html')
+def DocsearchResult(request):
+    if request.method=="POST":
+        # Fetching doctors based on the first name
+        queryset_list=Doctor.objects.order_by('-Firstname')
+
+        # taking states from choices
+        State_result=States
+
+        dept_result=Department
+        
+        # searching based on first name
+        if 'first_name' in request.GET:
+
+            Firstname=request.GET['first_name']
+
+            if Firstname:
+                queryset_list=queryset_list.filter(FirstName_iexact=Firstname)
+        
+
+        # searching based on last name
+
+        if 'last_name' in request.GET:
+            LastName=request.GET['last_name']
+
+            if LastName:
+                queryset_list=queryset_list.filter(LastName_iexact=LastName)
+
+        
+        # searching based on city
+
+        if 'city' in request.GET:
+            City=request.GET['city']
+
+            if City:
+                queryset_list=queryset_list.filter(City_iexact=City)
+        
+        if 'state' in request.GET:
+        #if the searched option is not equal to All i.e. if User select any other state than All then we're storing the state in State variable and filtering the required State from database.
+        #If user selects All then we dont filter any states and pass.
+            if not request.GET['state'] == "29":
+                State = request.GET['state']
+                if State:
+                    queryset_list = queryset_list.filter(State = State)
+          
+    #Department of doctor 
+        if 'dept' in request.GET:
+        #if the searched option is not equal to All i.e. if User selects any other department than All then we're storing the department in Departments variable and filtering the required Department from database.
+        #If user selects All then we dont filter any Department and pass.
+            if not request.GET['dept'] == "7":
+             Departments = request.GET['dept']
+
+            if Departments:
+                    queryset_list = queryset_list.filter(Department = Departments)
+   
+    #pincode
+    #Getting pincode from User Search for Doctor
+        if 'pincode' in request.GET:
+         #Storing pincode in Pincode
+            Pincode = request.GET['pincode']
+         #if Pincode exists then we are filtering the required pincode from database and storing it in queryset_list.
+            if Pincode:
+             queryset_list = queryset_list.filter(Pincode = Pincode)
+        
+
+        dict=[]
+
+        for result in queryset_list:
+            Result=result
+
+            State_result=States[result.State-1][1]
+            dept_result=Department[result.Department-1][1]
+
+            res={
+                'result':Result,
+                'State_result':stat_result,
+                'dept_result':dept_result
+            }
+
+            dict.append(res)
+
+        
+        context={
+            'dict':dict
+        }
+    
+        return render(request,'searchbarResults.html',context)
    
