@@ -623,4 +623,13 @@ def DocProfileUpdate(request):
 
     else:
         return render(request,'doctorUpdateProfile.html')
+    
+
+
+
+# search for doctor
+
+def searchResult(request):
+    if request.method=="GET" :
+        return render(request,'searchbarResults.html')
    
