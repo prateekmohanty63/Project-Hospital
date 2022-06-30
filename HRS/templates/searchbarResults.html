@@ -98,7 +98,7 @@
                     {% for i in result.result.Ratings_stars %}<span class="fa fa-star checked"></span>{% endfor %} {% for i in result.result.non_stars %}<span class="fa fa-star"></span>{% endfor %}
                     <br>
                     <!-- They can view his full profile by clicking here -->
-                    <div class="appointment-btn"><a href="{% url 'DoctorProfile' result.result.id %}">View Profile</a></div>
+                    <div class="appointment-btn"><a href="{% url 'doctorProfile' result.result.id %}">View Profile</a></div>
                     <div class="divider"> </div>
                 </div>
             </div>

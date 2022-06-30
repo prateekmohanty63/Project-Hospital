@@ -27,5 +27,5 @@ urlpatterns = [
     path('docProUpdate/',views.DocProfileUpdate,name='DocProfileUpdate'),
 
     # search views
-    path('DocsearchResult/',views.DocsearchResult,name='searchResult')
+    path('DocsearchResult/',views.DocsearchResult,name='DocsearchResult')
 ]
