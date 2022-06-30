@@ -321,7 +321,8 @@
           <div class="col-md-6 col-sm-6">
             <!--  right half(Search Form)-->
             <!-- Form for doctor search bar on submitting goes to searchbarResults-->
-            <form id="doctor_search" role="form" mrthod="post" action="">
+            <form id="doctor_search" role="form" method="post" action="/DocsearchResult/">
+              {% csrf_token %}
               <!-- Header division-->
               <div class="search_h1 wow fadeInUp" data-wow-delay="0.4s">
                 <h2>Search for a doctor</h2>

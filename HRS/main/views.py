@@ -633,7 +633,7 @@ def DocProfileUpdate(request):
 def DocsearchResult(request):
     if request.method=="POST":
         # Fetching doctors based on the first name
-        queryset_list=Doctor.objects.order_by('-Firstname')
+        queryset_list=Doctor.objects.order_by('-FirstName')
 
         # taking states from choices
         State_result=States
@@ -704,7 +704,7 @@ def DocsearchResult(request):
 
             res={
                 'result':Result,
-                'State_result':stat_result,
+                'State_result':State_result,
                 'dept_result':dept_result
             }
 
