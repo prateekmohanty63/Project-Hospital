@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from main.models import Hospital,Doctor,DocReview
+from main.models import Hospital,Doctor,DocReview,DocAppointment
 from .forms import DoctorForm,HospitalForm
 from django import forms
 from .choices import Department, States
@@ -717,3 +717,39 @@ def DocsearchResult(request):
     
         return render(request,'searchbarResults.html',context)
    
+
+
+# doctor appointment
+
+def DoctorAppointment(request):
+
+    if request.method=="POST":
+        DoctorUsername=request.POST['dname']
+        DateOfAppointment=request.POST['date']
+        additionalMessage=request.POST['message']
+
+
+        # Checking weather the user is signed in or not
+        if not request.user.is_authenticated:
+            messages.error(request,"Please sign in ")
+            return redirect('index')
+
+        
+        # retriving the user and doctor
+        user = User.objects.all().filter(username=request.user.username).get()
+        doctor=Doctor.objects.all().filter(Username=DoctorUsername).get()
+        #print(user)
+
+        # checking weather the doctor exists or not
+        if not doctor:
+            messages.error(request,'Doctor does not exists')
+            return redirect('index')
+        
+        appointment=DocAppointment(user=user,doctor=doctor,dateOfAppointment=DateOfAppointment,AdditionalMessage=additionalMessage)
+        appointment.save()
+
+        # send a mail to doctor and the user
+
+        messages.success(request,'Appointment sent successfully')
+        return redirect('index')
+
