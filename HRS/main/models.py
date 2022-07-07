@@ -106,4 +106,16 @@ class DocReview(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# Doctor appointment
+class DocAppointment(models.Model):
+    user=models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    doctor=models.ForeignKey(Doctor,on_delete=models.DO_NOTHING)
+    dateOfAppointment=models.DateField()
+    AdditionalMessage=models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.user.username
+
         
