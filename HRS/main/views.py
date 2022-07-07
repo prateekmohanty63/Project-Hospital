@@ -748,6 +748,8 @@ def DoctorAppointment(request):
         appointment=DocAppointment(user=user,doctor=doctor,dateOfAppointment=DateOfAppointment,AdditionalMessage=additionalMessage)
         appointment.save()
 
+        # send a mail to doctor and the user
+
         messages.success(request,'Appointment sent successfully')
         return redirect('index')
 
