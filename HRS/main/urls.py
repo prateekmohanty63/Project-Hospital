@@ -30,5 +30,5 @@ urlpatterns = [
     path('DocsearchResult/',views.DocsearchResult,name='DocsearchResult'),
 
     # doctor appointment
-    path('docAppointment/',views.DocAppointment,name='DocAppointment'),
+    path('docAppointment/',views.DoctorAppointment,name='docAppointment'),
 ]
