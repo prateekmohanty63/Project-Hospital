@@ -4,7 +4,7 @@ from os import stat_result
 from pickle import NONE
 from pydoc import Doc
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -753,3 +753,9 @@ def DoctorAppointment(request):
         messages.success(request,'Appointment sent successfully')
         return redirect('index')
 
+# Hospital features
+
+def hospitalprofile(request,hospitalid):
+    hospital=get_object_or_404(Hospital,pk=hospitalid)
+    doctorlist=Doctor.objects.all().filter(HospitalRegisterationNumber=hospital.HospitalRegisterationNumber)
+    
