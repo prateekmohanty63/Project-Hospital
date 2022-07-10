@@ -1,8 +1,9 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>Jeevan Naksha</title>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="description" content="" />
@@ -18,33 +19,22 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
-    <link
-      rel="stylesheet"
-      href="{% static 'css/owl.theme.default.min.css' %}"
-    />
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" />
 
-    <!-- MAIN CSS -->
     <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
   </head>
+
   <body
     id="top"
     data-spy="scroll"
     data-target=".navbar-collapse"
     data-offset="50"
   >
-    <!-- PRE LOADER -->
-    <section class="preloader">
-      <div class="spinner">
-        <span class="spinner-rotate"></span>
-      </div>
-    </section>
-
-    <!-- HEADER -->
     <header>
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-sm-5">
-            <p style="font-size: large;"> <a href=""><b>JEEVAN NAKSHA</b></a></p>
+            <p style="font-size: large;"> <a href="{% url 'index' %}"><b>JEEVAN NAKSHA</b></a></p>
           </div>
 
           <div class="col-md-8 col-sm-7 text-align-right">
@@ -59,87 +49,16 @@
         </div>
       </div>
     </header>
+<!-- sign fail page -->
+    <div class="container">
+        <p  class="text-danger h1">
+            something went wrong, check your credentials...
+        </p ><br>
+       
+        <a class="h3" href="{% url 'signin' %}">Try again</a>
 
-    <!-- Sign In Page -->
-    <section id="signin" data-stellar-background-ratio="3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-6">
-            <img
-              src="{% static 'images/signin.jpg' %}"
-              class="img-responsive"
-              alt=""
-            />
-          </div>
-
-          <div class="col-md-6 col-sm-6">
-            <!-- Signin FORM HERE -->
-            <form
-              id="signin-form"
-              method="POST"
-              action="#"
-            >
-              {% csrf_token %}
-              <!-- SECTION TITLE -->
-              <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
-                <h2>Sign in</h2>
-              </div>
-
-              <div class="wow fadeInUp" data-wow-delay="0.8s">
-                <div class="col-md-12 col-sm-12">
-                  <label for="name">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    name="username"
-                    placeholder="username"
-                    required
-                  />
-                </div>
-                <div class="col-md-12 col-sm-12">
-                  <label for="name">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="o_psw"
-                    name="password"
-                    placeholder="password"
-                    required
-                  />
-                </div>
-                <div class="shps" style="margin-top: 1em; margin-left : 18px;">
-                  Show Password: <input type="checkbox" name="showpass" id="showpass" onclick="show_pass()" style="height: 9px;">
-              </div>
-                <br />
-                <div class="col-md-12 col-sm-12">
-                  <button
-                    type="submit"
-                    class="form-control"
-                    id="cf-submit"
-                    name="submit"
-                  >
-                    Sign In
-                  </button>
-                </div>
-              </div>
-            </form>
-
-            <div class="col-md-12 col-sm-12">
-              <!-- link to reset password -->
-              <p><a href="">forgot password?</a></p>
-              <p>
-                If you don't have an account then
-                <!-- link to sign up form -->
-                <a href="">sign up</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
+    </div>
+    <!-- footer -->
     <footer data-stellar-background-ratio="5">
       <div class="container" id="contact">
         <div class="row">
@@ -224,7 +143,7 @@
         </div>
       </div>
     </footer>
-    <!-- SCRIPTS -->
+
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.sticky.js' %}"></script>
@@ -233,6 +152,5 @@
     <script src="{% static 'js/smoothscroll.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-    <script src="{% static 'js/authentication.js' %}"></script>
   </body>
 </html>

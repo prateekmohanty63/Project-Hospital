@@ -146,7 +146,7 @@
               style="padding-top: 10px; padding-bottom: 10px"
               class="phone-icon"
             >
-              <a href="{% url 'Signout' %}"
+              <a href=""
                 ><span class="button">Signout</span>
               </a>
             </span>
@@ -154,7 +154,7 @@
               style="padding-top: 10px; padding-bottom: 10px"
               class="phone-icon"
             >
-              <a href="{% url 'UpdateProfile' %}"
+              <a href="{% url 'DocProfileUpdate' %}"
                 ><span class="button">Update Profile</span>
               </a>
             </span>
@@ -189,7 +189,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6 sec1">
-            <img src="{{doctor.ProfilePhoto.url}}" alt="profile-photo" />
+            <img src="{{ doctor.ProfilePhoto.url }}" alt="profile-photo" />
             <div class="profile-contact">
               <h3>Name: Dr. {{ doctor.FirstName }} {{ doctor.LastName }}</h3>
               <h4 style="color: white">Username: {{doctor.Username}}</h4>
@@ -334,7 +334,7 @@
             <h2 class="review-heading h2 strong">Reviews & Ratings</h2>
 
             <!-- adding review form. here it checks whether user is logged in or not -->
-            <form action="" method="POST">
+            <form action="{% url 'doctorReview' %}" method="POST">
               {% csrf_token %} {% if user.is_authenticated %}
               <input
                 type="hidden"
@@ -425,7 +425,7 @@
                 <td>
                   <div>
                     <h4 class="h4" style="padding-left: 20px">
-                      {{ review.user.Username }}
+                      {{ review.user.username }}
                     </h4>
                     <img
                       class="avatar"
@@ -459,7 +459,7 @@
 
             <!-- flag is used to add view more reviews button -->
             {% if flag == 0 %}
-            <form action="{% url 'DoctorProfile' doctor.id %}" method="POST">
+            <form action="{% url 'doctorProfile' doctor.id %}" method="POST">
               {% csrf_token %}
               <button class="btn btn-info">Load more</button>
             </form>

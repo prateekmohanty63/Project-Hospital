@@ -9,6 +9,7 @@ from .views import *
 urlpatterns = [
     path('',views.index,name='index'),
     path('signin/',views.signIn,name='signin'),
+    path('signout/',views.signout,name='signout'),
     path('signup/',views.signUp,name='signup'),
     path('userReg/',views.userRegistration,name='userReg'),
     path('hospitalReg/',views.hospitalRegistration,name='hospitalReg'),
@@ -16,5 +17,18 @@ urlpatterns = [
 
     # profile views
 
-    path('doctorProfile/<int:doctor_id>',views.doctorProfile,name='doctorProfile')
+    path('doctorProfile/<int:doctor_id>',views.doctorProfile,name='doctorProfile'),
+
+    # doctor review
+    path('doctorReview/',views.docReview,name='doctorReview'),
+
+    
+    # profile update
+    path('docProUpdate/',views.DocProfileUpdate,name='DocProfileUpdate'),
+
+    # search views
+    path('DocsearchResult/',views.DocsearchResult,name='DocsearchResult'),
+
+    # doctor appointment
+    path('docAppointment/',views.DoctorAppointment,name='docAppointment'),
 ]
