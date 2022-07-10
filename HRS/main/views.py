@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from main.models import Hospital,Doctor,DocReview,DocAppointment
+from main.models import Hospital,Doctor,DocReview,DocAppointment,HospitalReview
 from .forms import DoctorForm,HospitalForm
 from django import forms
 from .choices import Department, States
@@ -755,7 +755,9 @@ def DoctorAppointment(request):
 
 # Hospital features
 
-def hospitalprofile(request,hospitalid):
-    hospital=get_object_or_404(Hospital,pk=hospitalid)
+def hospitalProfile(request,hospital_id):
+    hospital=get_object_or_404(Hospital,pk=hospital_id)
     doctorlist=Doctor.objects.all().filter(HospitalRegisterationNumber=hospital.HospitalRegisterationNumber)
-    
+    querysetlist=HospitalReview.objects.order_by("-review_date").filter(hospital=hospital)
+    if(request.method=="GET"):
+        return render(request,"hospitalprofile.html")
