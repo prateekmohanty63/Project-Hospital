@@ -31,4 +31,11 @@ urlpatterns = [
 
     # doctor appointment
     path('docAppointment/',views.DoctorAppointment,name='docAppointment'),
+
+    # profile views
+
+    path('hospitalProfile/<int:hospital_id>',views.hospitalProfile, name='hospitalProfile'),
+
+    # Hospital review
+    # path('doctorReview/', views.docReview, name='HospitalReview'),
 ]

@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 
-from main.models import User,Doctor,Hospital,DocReview,DocAppointment
+from main.models import User,Doctor,Hospital,DocReview,DocAppointment,HospitalReview
 
 
 
@@ -22,3 +22,5 @@ admin.site.register(Hospital)
 admin.site.register(DocReview)
 
 admin.site.register(DocAppointment)
+
+admin.site.register(HospitalReview)

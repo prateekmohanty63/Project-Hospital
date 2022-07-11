@@ -4,12 +4,12 @@ from os import stat_result
 from pickle import NONE
 from pydoc import Doc
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from main.models import Hospital,Doctor,DocReview,DocAppointment
+from main.models import Hospital,Doctor,DocReview,DocAppointment,HospitalReview
 from .forms import DoctorForm,HospitalForm
 from django import forms
 from .choices import Department, States
@@ -753,3 +753,77 @@ def DoctorAppointment(request):
         messages.success(request,'Appointment sent successfully')
         return redirect('index')
 
+# Hospital features
+
+def hospitalProfile(request,hospital_id):
+    if(request.method=="GET"):
+        hospital=get_object_or_404(Hospital,pk=hospital_id)
+        doctor_list=Doctor.objects.all().filter(HospitalRegisterationNumber=hospital.HospitalRegisterationNumber)
+        queryset_list=HospitalReview.objects.order_by("-review_date").filter(hospital=hospital)
+        
+        five_stars = 0
+        for review in queryset_list:
+            if review.star_rating == "12345":
+                five_stars = five_stars + 1
+        four_stars = 0
+        for review in queryset_list:
+            if review.star_rating == "1234":
+                four_stars = four_stars + 1
+        three_stars = 0
+        for review in queryset_list:
+            if review.star_rating == "123":
+                three_stars = three_stars + 1
+        two_stars = 0
+        for review in queryset_list:
+            if review.star_rating == "12":
+                two_stars = two_stars + 1
+        one_stars = 0
+        for review in queryset_list:
+            if review.star_rating == "1":
+                one_stars = one_stars + 1
+
+        #computing percentages of each star belogs to.
+        count = hospital.Ratings_count
+        if count != 0:
+            five_starPercentage = five_stars/count*100
+            four_starPercentage = four_stars/count*100
+            three_starPercentage = three_stars/count*100
+            two_starPercentage = two_stars/count*100
+            one_starPercentage = one_stars/count*100
+        else:
+            # this will run when no reviews are added as count = 0
+            five_starPercentage = 0
+            four_starPercentage = 0
+            three_starPercentage = 0
+            two_starPercentage = 0
+            one_starPercentage = 0
+
+        ratings_count = {
+            "five_star": five_stars,
+            "four_star": four_stars,
+            "three_star": three_stars,
+            "two_star": two_stars,
+            "one_star": one_stars,
+        }
+
+        # storing all counts in a ratings_percentage dictionary
+        ratings_percentage = {
+            "five_starPercentage": five_starPercentage,
+            "four_starPercentage": four_starPercentage,
+            "three_starPercentage": three_starPercentage,
+            "two_starPercentage": two_starPercentage,
+            "one_starPercentage": one_starPercentage,
+
+        }
+        flag=0
+        # if(request.method=="POST"):
+        flag=1
+        context={
+            "hospital":hospital,
+            "hospital_reviews":queryset_list,
+            "flag":flag,
+            "ratings_count":ratings_count,
+            "ratings_percentage":ratings_percentage,
+            "doctors":doctor_list,
+        }
+        return render(request,"hospitalprofile.html",context)
