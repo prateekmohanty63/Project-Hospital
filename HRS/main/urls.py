@@ -39,4 +39,8 @@ urlpatterns = [
     #Hospital review
     
     path('hospitalReview/', views.HosReview, name='hospitalReview'),
+
+    #Hospital Search
+
+    path('HosSearchResult/',views.HosSearchResult,name='HosSearchResult'),
 ]
