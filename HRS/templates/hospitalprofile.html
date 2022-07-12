@@ -391,7 +391,7 @@
           </div>
             <h2 class="review-heading h2 strong">Reviews & Ratings</h2>
             <!-- adding review form. here it checks whether user is logged in or not -->
-            <form action="" method="POST">
+            <form action="/hospitalReview/" method="POST">
               {% csrf_token %} {% if user.is_authenticated %}
               <input type="hidden" name="username" value="{{ user.username }}" />
               {% else %}

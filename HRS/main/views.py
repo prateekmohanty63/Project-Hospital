@@ -827,3 +827,85 @@ def hospitalProfile(request,hospital_id):
             "doctors":doctor_list,
         }
         return render(request,"hospitalprofile.html",context)
+
+# Hospital Review
+
+def HosReview(request):
+    
+    if(request.method=="POST"):
+        hospital_id=request.POST["hospital_id"]
+        hospital_name=request.POST["hospital_name"]
+
+
+        # checking if user is signed in
+
+        if not request.user.is_authenticated:
+            return redirect("signin")
+
+        try:
+            username=request.POST["username"]
+            star_rating=request.POST["rating"]
+        except:
+            return redirect('/hospitalProfile/'+hospital_id)
+
+        non_rating = "" #non_rating used for html page porpose
+        # updating non_rating based on star_rating
+        if star_rating == '1':
+            non_rating = "2345"
+        elif star_rating == '12':
+            non_rating = "345"
+        elif star_rating == '123':
+            non_rating = "45"
+        elif star_rating == '1234':
+            non_rating = "5"
+        elif star_rating == '12345':
+            non_rating = ""
+            
+        review=request.POST['review']
+
+        # user=User.objects.all().filter(username=request.user.username).get()
+        # print(user)
+        try:
+            user=User.objects.all().filter(username=request.user.username).get()
+        except: 
+            messages.error(request,"Please register for posting review")
+            return redirect('/hospitalProfile/'+hospital_id)
+
+        hospital=Hospital.objects.all().filter(Username=hospital_name).get()
+        Reviewed=HospitalReview(hospital=hospital,user=user,star_rating=star_rating,non_rating=non_rating,review=review)
+        Reviewed.save()
+
+        queryset_list=HospitalReview.objects.order_by("-review_date").filter(hospital=hospital)
+
+        avg = []
+        length = 0
+        for hospital in queryset_list:
+            length = length + 1 
+            avg.append(len(hospital.star_rating))  
+        
+        avg = sum(avg)/len(avg)
+        # print(avg)
+        stars = ""
+        non_stars = "12345"
+        if avg > 4.5:
+            stars = "12345"
+            non_stars = ""
+        elif avg > 3.5:
+            stars = "1234"
+            non_stars = "1"
+        elif avg > 2.5:
+            stars = "123"
+            non_stars = "12"
+        elif avg > 1.5:
+            stars = "12"
+            non_stars = "123"
+        elif avg > 0.5:
+            stars = "1"
+            non_stars = "1234"
+
+        # updating rating values
+
+        hospital=Hospital.objects.all().filter(Username=hospital_name).update(Rating=avg,Ratings_stars=stars,Ratings_count=length,non_stars=non_stars)
+
+        messages.success(request,"Your Review is Added Successfully.")
+        return redirect('/hospitalProfile/'+hospital_id)

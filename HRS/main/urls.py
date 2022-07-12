@@ -36,6 +36,7 @@ urlpatterns = [
 
     path('hospitalProfile/<int:hospital_id>',views.hospitalProfile, name='hospitalProfile'),
 
-    # Hospital review
-    # path('doctorReview/', views.docReview, name='HospitalReview'),
+    #Hospital review
+    
+    path('hospitalReview/', views.HosReview, name='hospitalReview'),
 ]
