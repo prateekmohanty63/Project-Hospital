@@ -136,13 +136,13 @@
           {% if user.username == hospital.Username %}
           <span style="padding-top: 10px; padding-bottom: 10px;" class="phone-icon">
 
-            <a href="{% url 'Signout' %}"><span class="button">Signout</span> </a>
+            <a href="{% url 'signout' %}"><span class="button">Signout</span> </a>
 
 
           </span>
           <span style="padding-top: 10px; padding-bottom: 10px;" class="email-icon">
 
-            <a href="{% url 'HosUpdateProfile' %}"><span class="button">Update Profile</span> </a>
+            <a href="{% url 'hosProUpdate' %}"><span class="button">Update Profile</span> </a>
 
 
           </span>
@@ -175,8 +175,8 @@
     <div class=".container-fluid ba">
       <img src="{{ hospital.HospitalPhoto.url }}" alt="Snow" style="width:100%; ">
       <div class="top-left">
-        <h1 style="color:white;"> {{hospital.HospitalName}} </h1>
-        <p class="back" style="color:white;"> {{hospital.HospitalDescription}} </p>
+        <h1 style="color:#000;"> {{hospital.HospitalName}} </h1>
+        <p class="back" style="color:#000;"> {{hospital.HospitalDescription}} </p>
       </div>
     </div>
   </section>
