@@ -909,3 +909,87 @@ def HosReview(request):
 
         messages.success(request,"Your Review is Added Successfully.")
         return redirect('/hospitalProfile/'+hospital_id)
+
+
+# Hospital Search
+
+def HosSearchResult(request):
+    if request.method=="POST":
+        # Fetching doctors based on the first name
+        queryset_list=Hospital.objects.order_by('-HospitalName')
+
+        # taking states from choices
+        State_result=States
+        
+        # searching based on first name
+        if 'first_name' in request.GET:
+
+            HospitalName=request.GET['first_name']
+
+            if HospitalName:
+                queryset_list=queryset_list.filter(FirstName_iexact=HospitalName)
+        
+
+        # searching based on last name
+
+        if 'last_name' in request.GET:
+            RegNo=request.GET['last_name']
+
+            if RegNo:
+                queryset_list=queryset_list.filter(HospitalRegisterationNumber_iexact=RegNo)
+
+        # searching based on place name
+
+        if 'place' in request.GET:
+            Town=request.GET['place']
+
+            if Town:
+                queryset_list=queryset_list.filter(Town_iexact=Town)
+
+        
+        # searching based on city
+
+        if 'city' in request.GET:
+            City=request.GET['city']
+
+            if City:
+                queryset_list=queryset_list.filter(City_iexact=City)
+        
+        if 'state' in request.GET:
+        #if the searched option is not equal to All i.e. if User select any other state than All then we're storing the state in State variable and filtering the required State from database.
+        #If user selects All then we dont filter any states and pass.
+            if not request.GET['state'] == "29":
+                State = request.GET['state']
+                if State:
+                    queryset_list = queryset_list.filter(State = State)
+
+    #pincode
+    #Getting pincode from User Search for Doctor
+        if 'pincode' in request.GET:
+         #Storing pincode in Pincode
+            Pincode = request.GET['pincode']
+         #if Pincode exists then we are filtering the required pincode from database and storing it in queryset_list.
+            if Pincode:
+             queryset_list = queryset_list.filter(Pincode = Pincode)
+        
+
+        dict=[]
+
+        for result in queryset_list:
+            Result=result
+
+            State_result=States[result.State-1][1]
+
+            res={
+                'result':Result,
+                'State_result':State_result,
+            }
+
+            dict.append(res)
+
+        
+        context={
+            'dict':dict
+        }
+    
+        return render(request,'hosSearchResults.html',context)        

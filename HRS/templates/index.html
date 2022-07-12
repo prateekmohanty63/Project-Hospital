@@ -491,7 +491,8 @@
         <div class="row">
           <div class="col-md-6 col-sm-6">  <!-- The left side of the container for search form-->
             <!-- the below id doctor_search was given since css file is same as doctor search bar-->
-            <form id="doctor_search" role="form" mrthod="post" action="" >  <!-- Creating the form for search bar-->
+            <form id="doctor_search" role="form" method="post" action="/HosSearchResult/" >  <!-- Creating the form for search bar-->
+              {% csrf_token %}
               <div class="search_h1 wow fadeInUp" data-wow-delay="0.4s"> <!-- Heading division for searching-->
                 <h2>Search for a hospital</h2>
               </div>
