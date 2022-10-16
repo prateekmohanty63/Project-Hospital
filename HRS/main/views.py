@@ -724,6 +724,7 @@ def DocsearchResult(request):
 def DoctorAppointment(request):
 
     if request.method=="POST":
+        print("hello")
         DoctorUsername=request.POST['dname']
         DateOfAppointment=request.POST['date']
         additionalMessage=request.POST['message']
