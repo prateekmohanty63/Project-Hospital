@@ -730,7 +730,7 @@ def DoctorAppointment(request):
                 )
         userEmail = request.user.email
 
-        userEmail = send_mail (
+        useremail = send_mail (
                 userSubject,
                 userBody,
                 "prateekmohanty63@gmail.com",
@@ -747,13 +747,13 @@ def DoctorAppointment(request):
                     "\n\nFor any queries please reply to this mail"
                 )
 
-        doctoremail = doctor.Email
+        doctorEmail = doctor.Email
 
-        doctorEmail = send_mail (
+        doctoremail= send_mail (
                 doctorSubject,
                 doctorBody,
                 "prateekmohanty63@gmail.com",
-                [doctoremail],
+                [doctorEmail],
                 fail_silently=False
         )
 
