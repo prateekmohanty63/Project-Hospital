@@ -15,6 +15,7 @@ from django import forms
 from .choices import Department, States
 from django.contrib import auth
 from django.core.files.storage import FileSystemStorage
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -716,6 +717,45 @@ def DoctorAppointment(request):
         appointment = DocAppointment(
             user=user, doctor=doctor, dateOfAppointment=DateOfAppointment, AdditionalMessage=additionalMessage)
         appointment.save()
+
+
+        userSubject = "Reference for your appointment"
+        userBody = ("Hi " + user.username + 
+                    "\n\nHere is what we got from you" + 
+                    "\n\nDoctor Name: " + doctor.FirstName + doctor.LastName + 
+                    "\n\nAppointment Date: " + DateOfAppointment + 
+                    "\n\nAdditional Message: " + additionalMessage + 
+                    "\n\nThe doctor will message to your appointment enquiry to your email in a span of 2-3 days" + 
+                    "\n\nFor any queries please reply to this mail"
+                )
+        userEmail = request.user.email
+
+        useremail = send_mail (
+                userSubject,
+                userBody,
+                "prateekmohanty63@gmail.com",
+                [userEmail],
+                fail_silently=False
+        )
+
+        doctorSubject = "Appointment enquiry from " + user.username 
+        doctorBody = ("Hi Doctor " + doctor.FirstName + doctor.LastName + 
+                    "\n\nThis is to inform you that we got an appointment request from " + user.username+ 
+                    "\n\nAppointment Date: " + DateOfAppointment + 
+                    "\n\nAdditional Message: " + additionalMessage + 
+                    "\n\nPlease respond to his enquiry within 2-3 days, and contact with the user if necessary" + 
+                    "\n\nFor any queries please reply to this mail"
+                )
+
+        doctorEmail = doctor.Email
+
+        doctoremail= send_mail (
+                doctorSubject,
+                doctorBody,
+                "prateekmohanty63@gmail.com",
+                [doctorEmail],
+                fail_silently=False
+        )
 
         # send a mail to doctor and the user
 
