@@ -1,0 +1,1 @@
+web: gunicorn HRS.wsgi --log-file -
