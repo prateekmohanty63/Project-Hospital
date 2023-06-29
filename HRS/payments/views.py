@@ -34,7 +34,7 @@ class ProductLandingPageView(TemplateView):
 
 class CreateCheckoutSessionView(View):
     def post(self,request,*args,**kwargs):
-        stripe.api_key = 'sk_test_51NODINSJxRVXZg3hle1DXQ4NWjHxQUN0wVaYiFLPFZ6fC6tIALTuV13eWT2jv9YTUriz10phNCkW4z4r8ZER2mAt00yhzdLQtS'
+        stripe.api_key = '*******' # put your stripe secret key here 
         product_id=self.kwargs["pk"]
         product=Product.objects.get(id=product_id)
         YOUR_DOMAIN = "http://127.0.0.1:8000"
