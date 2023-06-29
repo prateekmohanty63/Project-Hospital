@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'crispy_forms',
     'django.contrib.humanize',
-    'whitenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic',
+    'payments'
     
 ]
 
@@ -144,3 +145,8 @@ STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+STRIPE_PUBLIC_KEY=""
+STRIPE_SECRET_KEY=""
+STRIPE_WEBHOOK_SECRET=""
